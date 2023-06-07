@@ -38,7 +38,7 @@ async def get_lp_holders_by_contract(contract, limit=20):
         tmp = await r.json()
         for i in tmp["result"]:
             if i["info"]["jettonMaster"]["jettonContent"]["onchain"]["known"]["symbol"] == "LP":
-                r = await session.get(url=f"https://api.ton.cat/v2/contracts/jetton_minter/{contract}/holders")
+                r = await session.get(url=f"https://api.ton.cat/v2/contracts/jetton_minter/{i['address']}/holders")
                 
                 holders = await r.json()
 
