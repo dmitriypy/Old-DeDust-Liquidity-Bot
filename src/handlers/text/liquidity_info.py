@@ -15,7 +15,8 @@ async def liquidity(msg: types.Message):
 <b>Информация о ликвидности для ${text[1].upper()}</b>
 
 TON Liquidity = {data[1]} TON
-{text[1].upper()} Liquidity = {data[0]} {text[1].upper()}
+{text[1].upper()} Liquidity = {data[2]} {text[1].upper()}
+{text[1].upper()}-LP Tokens = {data[0]} LP
 """, parse_mode="html")
 
             else:
