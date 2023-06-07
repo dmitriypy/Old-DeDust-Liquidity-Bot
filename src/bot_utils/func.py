@@ -43,7 +43,7 @@ async def get_lp_holders_by_contract(contract, limit=20):
                 holders = await r.json()
 
     if holders != None:
-        for i in holders["holders"][:limit]:
-            if int(i["info"]["jettonWallet"]["balance"]) > 0:
-                result[i["info"]["jettonWallet"]["ownerAddress"]] = int(i["info"]["jettonWallet"]["balance"]) / 1e9
+        for i in holders["holders"][1:limit]:
+            if int(i["balance"]) > 0:
+                result[i["holder_address"]] = float(i["balance_normalized"])
         return result
