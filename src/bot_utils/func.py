@@ -38,13 +38,12 @@ async def get_lp_holders_by_contract(contract, limit=20):
         tmp = await r.json()
         for i in tmp["result"]:
             if i["info"]["jettonMaster"]["jettonContent"]["onchain"]["known"]["symbol"] == "LP":
-                r = await session.get(url=f"https://tonobserver.com/api/v2/jetton_top_holders/{i['address']}",
-                                      params={"limit": limit + 1})
+                r = await session.get(url=f"https://api.ton.cat/v2/contracts/jetton_minter/{contract}/holders")
                 
                 holders = await r.json()
 
     if holders != None:
-        for i in holders["result"][1:]:
+        for i in holders["holders"][:limit]:
             if int(i["info"]["jettonWallet"]["balance"]) > 0:
                 result[i["info"]["jettonWallet"]["ownerAddress"]] = int(i["info"]["jettonWallet"]["balance"]) / 1e9
         return result
